@@ -77,7 +77,7 @@
         public override string ToString()
         {
             string str = string.Empty;
-            str += "№ зачётной книжки: " + this._id + "; ";
+            str += "Номер зачётной книжки: " + this._id + "; ";
             str += "ФИО: " + this._lastName + " " + this._firstName;
             if(this._middleName!="") str += " " + this._middleName + "; ";
             else str += "; ";
@@ -97,9 +97,9 @@
             || a.lastName != b.lastName || a.birthDate != b.birthDate
             || a.addres != b.addres || a.phoneNumber != b.phoneNumber;
 
-        public int CompareTo(object? o)
+        public int CompareTo(object? obj)
         {
-            if (o is Student stud) return lastName.CompareTo(stud.lastName);
+            if (obj is Student stud) return lastName.CompareTo(stud.lastName);
             else throw new ArgumentException("Некорректное значение параметра");
         }
     }

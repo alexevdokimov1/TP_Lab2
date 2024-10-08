@@ -2,12 +2,18 @@
 {
     class Group
     {
-        protected int _number;
+        protected string _groupName;
         protected List<Student> _students;
 
         public Group(int number)
         {
-            this._number = number;
+            this._groupName = number.ToString();
+            _students = new List<Student>();
+        }
+
+        public Group(string groupName)
+        {
+            this._groupName = groupName;
             _students = new List<Student>();
         }
 
@@ -20,11 +26,10 @@
                     if (_students[i].id == id)
                     {
                         _students[i] = value;
-                       
                         return;
                     }
                 }
-                throw new ArgumentException($"Студента c № {id} не возможно заменить; " +
+                throw new ArgumentException($"Студента c №{id} не возможно заменить; " +
                         "такого номера зачётной книжки ещё не существет");
             }
             get {
@@ -63,7 +68,7 @@
         public virtual string getInfo()
         {
             string str = string.Empty;
-            str += "Группа " + _number + "\n";
+            str += "Группа " + _groupName + "\n";
             foreach (Student student in _students) {
                 str += student.ToString() + "\n";
             }
