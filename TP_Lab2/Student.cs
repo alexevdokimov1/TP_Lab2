@@ -64,22 +64,14 @@
         }
 
         public Student(int id, string firstName, string lastName, string birthDate, string addres, string phoneNumber)
-        {
-            this._id = id;
-            this._firstName = firstName;
-            this._middleName = "";
-            this._lastName = lastName;
-            this._birthDate = birthDate;
-            this._addres = addres;
-            this._phoneNumber = phoneNumber;
-        }
+            : this(id, firstName, "", lastName, birthDate, addres, phoneNumber) { }
 
         public override string ToString()
         {
             string str = string.Empty;
             str += "Номер зачётной книжки: " + this._id + "; ";
             str += "ФИО: " + this._lastName + " " + this._firstName;
-            if(this._middleName!="") str += " " + this._middleName + "; ";
+            if(!string.IsNullOrEmpty(this._middleName)) str += " " + this._middleName + "; ";
             else str += "; ";
             str += "Дата рождения: " + this._birthDate + "; ";
             str += "Адресс: " + this._addres + "; ";
@@ -100,7 +92,7 @@
         public int CompareTo(object? obj)
         {
             if (obj is Student stud) return lastName.CompareTo(stud.lastName);
-            else throw new ArgumentException("Некорректное значение параметра");
+            else throw new ArgumentException("Некорректное сравнение");
         }
     }
 }

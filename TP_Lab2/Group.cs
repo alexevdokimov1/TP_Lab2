@@ -5,11 +5,7 @@
         protected string _groupName;
         protected List<Student> _students;
 
-        public Group(int number)
-        {
-            this._groupName = number.ToString();
-            _students = new List<Student>();
-        }
+        public Group(int number) : this(number.ToString()) {}
 
         public Group(string groupName)
         {
