@@ -54,13 +54,13 @@
 
         public Student(int id, string firstName, string middleName, string lastName, string birthDate, string addres, string phoneNumber)
         {
-            this._id = id;
-            this._firstName = firstName;
-            this._middleName = middleName;
-            this._lastName = lastName;
-            this._birthDate = birthDate;
-            this._addres = addres;
-            this._phoneNumber = phoneNumber;
+            _id = id;
+            _firstName = firstName;
+            _middleName = middleName;
+            _lastName = lastName;
+            _birthDate = birthDate;
+            _addres = addres;
+            _phoneNumber = phoneNumber;
         }
 
         public Student(int id, string firstName, string lastName, string birthDate, string addres, string phoneNumber)

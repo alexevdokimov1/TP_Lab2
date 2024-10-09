@@ -5,13 +5,13 @@
         protected string _groupName;
         protected List<Student> _students;
 
-        public Group(int number) : this(number.ToString()) {}
-
         public Group(string groupName)
         {
-            this._groupName = groupName;
+            _groupName = groupName;
             _students = new List<Student>();
         }
+
+        public Group(int number) : this(number.ToString()) { }
 
         public virtual Student this[int id]
         {
@@ -21,7 +21,9 @@
                 {
                     if (_students[i].id == id)
                     {
+                        value.id = id;
                         _students[i] = value;
+                        _students.Sort();
                         return;
                     }
                 }
