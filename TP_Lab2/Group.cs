@@ -1,66 +1,62 @@
-﻿namespace TP_Lab2
+﻿using System.Text;
+namespace TP_Lab2
 {
-    class Group
+    class Group(string groupName)
     {
-        protected string _groupName;
-        protected List<Student> _students;
+        protected string groupName = groupName;
+        protected List<Student> students = [];
 
-        public Group(string groupName)
-        {
-            _groupName = groupName;
-            _students = new List<Student>();
-        }
-
-        public Group(int number) : this(number.ToString()) { }
-
-        public virtual Student this[int id]
+        public Student this[int id]
         {
             get {
-                for (int i = 0; i < _students.Count; i++)
-                {
-                    if (_students[i].id == id) return _students[i];
-                }
-                throw new ArgumentException($"Студента с номером зачётной {id} книжки не существует");
+                var found = students.Find(x => x.Id == id);
+                if (found is not null) return found;
+                throw new ArgumentException($"Студента с номером зачётной книжки {id} не существует");
             }
-        }
-
-        public virtual void addStudent(Student student)
-        {
-            for (int i = 0; i < _students.Count; i++)
+            set
             {
-                if (_students[i].id == student.id) throw new ArgumentException($"Студент уже существует");
+                var found = students.Find(x => x.Id == id);
+                if (found is null) throw new ArgumentException($"Студента c №{id} не возможно заменить; " +
+                        "такого номера зачётной книжки ещё не существет");
+                int indexOfStudent = students.IndexOf(found);
+                value.Id = id;
+                students[indexOfStudent] = value;   
             }
-            _students.Add(student);
-            _students.Sort();
         }
 
-        public virtual void removeStudent(int id) {
-            for (int i = 0; i < _students.Count; i++)
-            {
-                if (_students[i].id == id) { _students.RemoveAt(i); return; }
-            }
-            throw new ArgumentException($"Студента с номером зачётной книжки {id} не существует; Удаление не произведено");
-        }
-
-        public virtual void removeStudent(Student student)
+        public void AddStudent(Student student)
         {
-            if (_students.Contains(student)) _students.Remove(student);
-            else throw new ArgumentException("Студента не существует; Удаление не произведено");
+            var found = students.Find(x => x.Id == student.Id);
+            if (found is not null) throw new ArgumentException($"Студент уже существует");
+            students.Add(student);
+            students.Sort();
         }
 
-        public virtual string getInfo()
+        public void RemoveStudent(int id) {
+            var found = students.Find(x => x.Id == id);
+            if (found is null) throw new ArgumentException($"Студента с номером зачётной книжки {id} не существует");
+            students.Remove(found);
+        }
+
+        public void RemoveStudent(Student student)
         {
-            string str = string.Empty;
-            str += "Группа " + _groupName + "\n";
-            foreach (Student student in _students) {
-                str += student.ToString() + "\n";
+            if (!students.Contains(student)) throw new ArgumentException("Студента не существует");
+            students.Remove(student);
+        }
+
+        public string GetInfo()
+        {
+            StringBuilder stringBuilder = new();
+            stringBuilder.Append("Группа " + groupName + "\n");
+            foreach (Student student in students) {
+                stringBuilder.Append(student.ToString() + "\n");
             }
-            return str;
+            return stringBuilder.ToString();
         }
 
         public override string ToString()
         {
-            return this.getInfo();
+            return this.GetInfo();
         }
     }
 }
