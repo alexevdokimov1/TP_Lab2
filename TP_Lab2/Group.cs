@@ -15,28 +15,13 @@
 
         public virtual Student this[int id]
         {
-            set
-            {
+            get {
                 for (int i = 0; i < _students.Count; i++)
                 {
-                    if (_students[i].id == id)
-                    {
-                        value.id = id;
-                        _students[i] = value;
-                        _students.Sort();
-                        return;
-                    }
+                    if (_students[i].id == id) return _students[i];
                 }
-                throw new ArgumentException($"Студента c №{id} не возможно заменить; " +
-                        "такого номера зачётной книжки ещё не существет");
+                throw new ArgumentException($"Студента с номером зачётной {id} книжки не существует");
             }
-            get {
-                    for (int i = 0; i < _students.Count; i++)
-                    {
-                        if (_students[i].id == id) return _students[i];
-                    }
-                    throw new ArgumentException($"Студента с номером зачётной {id} книжки не существует");
-                }
         }
 
         public virtual void addStudent(Student student)
@@ -71,6 +56,11 @@
                 str += student.ToString() + "\n";
             }
             return str;
+        }
+
+        public override string ToString()
+        {
+            return this.getInfo();
         }
     }
 }

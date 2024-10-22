@@ -1,4 +1,6 @@
-﻿namespace TP_Lab2
+﻿using System.Text;
+
+namespace TP_Lab2
 {
     class Student : IComparable
     {
@@ -38,7 +40,10 @@
         }
         public string phoneNumber { 
             get => _phoneNumber;
-            set => _phoneNumber = value;
+            set {  if (value.IndexOf("8", 0, 1) != -1 || value.IndexOf("+7", 0, 2) != -1)
+                    _phoneNumber = value;
+                else throw new ArgumentException($"Код номер страны должен принадлежать РФ (+7/8):\n{value}");
+            }
         }
 
         public override bool Equals(object? obj)
@@ -68,15 +73,15 @@
 
         public override string ToString()
         {
-            string str = string.Empty;
-            str += "Номер зачётной книжки: " + this._id + "; ";
-            str += "ФИО: " + this._lastName + " " + this._firstName;
-            if(!string.IsNullOrEmpty(this._middleName)) str += " " + this._middleName + "; ";
-            else str += "; ";
-            str += "Дата рождения: " + this._birthDate + "; ";
-            str += "Адресс: " + this._addres + "; ";
-            str += "Номер телефона: " + this._phoneNumber;
-            return str;
+            StringBuilder strBuild = new StringBuilder();
+            strBuild.Append("Номер зачётной книжки: " + this._id + "; ");
+            strBuild.Append("ФИО: " + this._lastName + " " + this._firstName);
+            if(!string.IsNullOrEmpty(this._middleName)) strBuild.Append(" " + this._middleName + "; ");
+            else strBuild.Append("; ");
+            strBuild.Append("Дата рождения: " + this._birthDate + "; ");
+            strBuild.Append("Адресс: " + this._addres + "; ");
+            strBuild.Append("Номер телефона: " + this._phoneNumber);
+            return strBuild.ToString();
         }
 
         public static bool operator == (Student a, Student b) => 
