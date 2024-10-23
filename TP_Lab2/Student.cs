@@ -1,6 +1,4 @@
-﻿using System.Data.SqlTypes;
-using System.Text;
-
+﻿using System.Text;
 namespace TP_Lab2
 {
     class Student : IComparable

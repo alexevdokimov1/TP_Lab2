@@ -5,7 +5,6 @@ namespace TP_Lab2
     {
         protected string groupName = groupName;
         protected List<Student> students = [];
-
         public Student this[int id]
         {
             get {
@@ -17,15 +16,17 @@ namespace TP_Lab2
             {
                 var found = students.Find(x => x.Id == id);
                 if (found is null) throw new ArgumentException($"Студента c №{id} не возможно заменить; " +
-                        "такого номера зачётной книжки ещё не существет");
+                        "такого номера зачётной книжки ещё не существет; нужно добавить студента");
                 int indexOfStudent = students.IndexOf(found);
                 value.Id = id;
-                students[indexOfStudent] = value;   
+                students[indexOfStudent] = value;
+                students.Sort();
             }
         }
 
         public void AddStudent(Student student)
         {
+            if(student.Id < 0) throw new ArgumentException($"Студент с номером зачётной книжки {student.Id} не может быть создан");
             var found = students.Find(x => x.Id == student.Id);
             if (found is not null) throw new ArgumentException($"Студент уже существует");
             students.Add(student);
@@ -40,7 +41,7 @@ namespace TP_Lab2
 
         public void RemoveStudent(Student student)
         {
-            if (!students.Contains(student)) throw new ArgumentException("Студента не существует");
+            if (!students.Contains(student)) throw new ArgumentException($"Студента {student.LastName} не существует");
             students.Remove(student);
         }
 

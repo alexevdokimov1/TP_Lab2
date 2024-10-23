@@ -19,7 +19,8 @@
                 group.AddStudent(student4);
                 group.AddStudent(student5);
 
-                group[3]=new Student(0, "Ирина", "Кочеткова", "НД", "НД", "НД");
+                group[3]=new Student("Ирина", "Кочеткова", "НД", "НД", "НД");
+                group[3].PhoneNumber = "8 800 555 35 35";
 
                 group.RemoveStudent(0);
 
@@ -28,6 +29,8 @@
                 Console.WriteLine("Студент с номером зачётной книжки 3: \n" + group[3]);
 
                 Console.Write(group.GetInfo());
+
+                group.RemoveStudent(student2);
             }
             catch (Exception e) { 
                 Console.WriteLine(e.Message);
