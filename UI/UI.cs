@@ -1,4 +1,5 @@
-﻿namespace TP_Lab2
+﻿using AcademicEntities;
+namespace UI
 {
     class UI
     {
@@ -19,7 +20,7 @@
                 group.AddStudent(student4);
                 group.AddStudent(student5);
 
-                group[3]=new Student("Ирина", "Кочеткова", "НД", "НД", "НД");
+                group[3]=new("Ирина", "Кочеткова", "НД", "НД", "НД");
                 group[3].PhoneNumber = "8 800 555 35 35";
 
                 group.RemoveStudent(0);

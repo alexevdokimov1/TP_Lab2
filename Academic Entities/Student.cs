@@ -1,14 +1,14 @@
 ﻿using System.Text;
-namespace TP_Lab2
+namespace AcademicEntities
 {
-    class Student : IComparable
+    public class Student : IComparable
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string BirthDate { get; set; }
-        public string Addres { get; set; }
+        public string Address { get; set; }
         public string PhoneNumber { get; set; }
 
         public override bool Equals(object? obj)
@@ -22,18 +22,11 @@ namespace TP_Lab2
             return base.GetHashCode();
         }
 
-        public Student(int id, string firstName, string middleName, string lastName, 
+        public Student(int id, string firstName, string middleName, string lastName,
             string birthDate, string addres, string phoneNumber)
-        {
-            Id = id;
-            FirstName = firstName;
-            MiddleName = middleName;
-            LastName = lastName;
-            BirthDate = birthDate;
-            Addres = addres;
-            PhoneNumber = phoneNumber;
-        }
-
+            => (Id, FirstName, MiddleName, LastName, BirthDate, Address, PhoneNumber) 
+            = (id, firstName, middleName, lastName, birthDate, addres, phoneNumber);
+        
         public Student(string firstName, string middleName, string lastName, string birthDate, string addres, string phoneNumber)
             : this(-1, firstName, middleName, lastName, birthDate, addres, phoneNumber) { }
 
@@ -51,7 +44,7 @@ namespace TP_Lab2
             if(!string.IsNullOrEmpty(this.MiddleName)) strBuild.Append(" " + this.MiddleName + "; ");
             else strBuild.Append("; ");
             strBuild.Append("Дата рождения: " + this.BirthDate + "; ");
-            strBuild.Append("Адресс: " + this.Addres + "; ");
+            strBuild.Append("Адресс: " + this.Address + "; ");
             strBuild.Append("Номер телефона: " + this.PhoneNumber);
             return strBuild.ToString();
         }
@@ -59,7 +52,7 @@ namespace TP_Lab2
         public static bool operator == (Student a, Student b) => 
             a.Id == b.Id && a.FirstName == b.FirstName && a.MiddleName == b.MiddleName
             && a.LastName == b.LastName && a.BirthDate == b.BirthDate 
-            && a.Addres == b.Addres && a.PhoneNumber == b.PhoneNumber;
+            && a.Address == b.Address && a.PhoneNumber == b.PhoneNumber;
 
         public static bool operator != (Student a, Student b) => !(a == b);
 
