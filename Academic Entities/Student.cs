@@ -23,18 +23,18 @@ namespace AcademicEntities
         }
 
         public Student(int id, string firstName, string middleName, string lastName,
-            string birthDate, string addres, string phoneNumber)
+            string birthDate, string address, string phoneNumber)
             => (Id, FirstName, MiddleName, LastName, BirthDate, Address, PhoneNumber) 
-            = (id, firstName, middleName, lastName, birthDate, addres, phoneNumber);
+            = (id, firstName, middleName, lastName, birthDate, address, phoneNumber);
         
-        public Student(string firstName, string middleName, string lastName, string birthDate, string addres, string phoneNumber)
-            : this(-1, firstName, middleName, lastName, birthDate, addres, phoneNumber) { }
+        public Student(string firstName, string middleName, string lastName, string birthDate, string address, string phoneNumber)
+            : this(-1, firstName, middleName, lastName, birthDate, address, phoneNumber) { }
 
-        public Student(int id, string firstName, string lastName, string birthDate, string addres, string phoneNumber)
-            : this(id, firstName, "", lastName, birthDate, addres, phoneNumber) { }
+        public Student(int id, string firstName, string lastName, string birthDate, string address, string phoneNumber)
+            : this(id, firstName, "", lastName, birthDate, address, phoneNumber) { }
 
-        public Student(string firstName, string lastName, string birthDate, string addres, string phoneNumber)
-            : this(firstName, "", lastName, birthDate, addres, phoneNumber) { }
+        public Student(string firstName, string lastName, string birthDate, string address, string phoneNumber)
+            : this(firstName, "", lastName, birthDate, address, phoneNumber) { }
 
         public override string ToString()
         {
